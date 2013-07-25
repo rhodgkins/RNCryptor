@@ -129,39 +129,40 @@ const uint8_t kRNCryptorFileVersion = 2;
 
 - (id)initWithHandler:(RNCryptorHandler)handler
 {
-  NSParameterAssert(handler);
-  self = [super init];
-  if (self) {
-    _responseQueue = dispatch_get_current_queue();
-    
+    NSParameterAssert(handler);
+    self = [super init];
+    if (self) {
+        NSString *responseQueueName = [@"net.robnapier.response." stringByAppendingString:NSStringFromClass([self class])];
+        _responseQueue = dispatch_queue_create([responseQueueName UTF8String], NULL);
+        
 #if !OS_OBJECT_USE_OBJC
-    dispatch_retain(_responseQueue);
+        dispatch_retain(_responseQueue);
 #endif
-      
-    NSString *queueName = [@"net.robnapier." stringByAppendingString:NSStringFromClass([self class])];
-    _queue = dispatch_queue_create([queueName UTF8String], DISPATCH_QUEUE_SERIAL);
-    __outData = [NSMutableData data];
-
-    _handler = [handler copy];
-  }
-  return self;
+        
+        NSString *queueName = [@"net.robnapier." stringByAppendingString:NSStringFromClass([self class])];
+        _queue = dispatch_queue_create([queueName UTF8String], DISPATCH_QUEUE_SERIAL);
+        __outData = [NSMutableData data];
+        
+        _handler = [handler copy];
+    }
+    return self;
 }
 
 - (void)dealloc
 {
-  if (_responseQueue) {
+    if (_responseQueue) {
 #if !OS_OBJECT_USE_OBJC
-    dispatch_release(_responseQueue);
+        dispatch_release(_responseQueue);
 #endif
-    _responseQueue = NULL;
-  }
-
-  if (_queue) {
+        _responseQueue = NULL;
+    }
+    
+    if (_queue) {
 #if !OS_OBJECT_USE_OBJC
-    dispatch_release(_queue);
+        dispatch_release(_queue);
 #endif
-    _queue = NULL;
-  }
+        _queue = NULL;
+    }
 }
 
 - (void)setResponseQueue:(dispatch_queue_t)aResponseQueue
