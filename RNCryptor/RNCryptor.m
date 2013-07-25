@@ -127,6 +127,7 @@ const uint8_t kRNCryptorFileVersion = 2;
   return data;
 }
 
+/// Fixed dispatch queue error
 - (id)initWithHandler:(RNCryptorHandler)handler
 {
     NSParameterAssert(handler);
@@ -148,6 +149,7 @@ const uint8_t kRNCryptorFileVersion = 2;
     return self;
 }
 
+/// Fixed dispatch queue error
 - (void)dealloc
 {
     if (_responseQueue) {
