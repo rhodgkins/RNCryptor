@@ -31,7 +31,7 @@
 NSString *const kRNCryptorErrorDomain = @"net.robnapier.RNCryptManager";
 const uint8_t kRNCryptorFileVersion = 2;
 
-// TODO: This is a slightly expensive solution, but it's convenient. May want to create a "walkable" data object
+// This is a slightly expensive solution, but it's convenient. May want to create a "walkable" data object
 @implementation NSMutableData (RNCryptor)
 - (NSData *)_RNConsumeToIndex:(NSUInteger)index
 {
@@ -111,7 +111,7 @@ const uint8_t kRNCryptorFileVersion = 2;
                                     derivedKey.length);                 // derivedKeyLen
 
   // Do not log password here
-  // TODO: Is is safe to assert here? We read salt from a file (but salt.length is internal).
+  // Is is safe to assert here? We read salt from a file (but salt.length is internal).
   NSAssert(result == kCCSuccess, @"Unable to create AES key for password: %d", result);
 
   return derivedKey;

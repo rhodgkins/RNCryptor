@@ -33,37 +33,3 @@ extern NSString *const kRNCryptorOpenSSLSaltedString;
 NSData *RNOpenSSLCryptorGetKey(NSString *password, NSData *salt, RNCryptorKeyDerivationSettings keySettings);
 NSData *RNOpenSSLCryptorGetIV(NSData *key, NSString *password, NSData *salt, RNCryptorKeyDerivationSettings keySettings);
 
-
-//
-//#import "RNCryptor.h"
-//
-//
-//@interface RNOpenSSLCryptor : NSObject
-//+ (RNOpenSSLCryptor *)openSSLCryptor;
-//
-//- (BOOL)encryptFromStream:(NSInputStream *)fromStream
-//                 toStream:(NSOutputStream *)toStream
-//                 password:(NSString *)password
-//                    error:(NSError **)error;
-//
-//- (BOOL)decryptFromStream:(NSInputStream *)fromStream
-//                 toStream:(NSOutputStream *)toStream
-//                 password:(NSString *)password
-//                    error:(NSError **)error;
-//
-//@end
-//
-//static const RNCryptorSettings kRNCryptorOpenSSLSettings = {
-//    .algorithm = kCCAlgorithmAES128,
-//    .mode = kCCModeCBC,
-//    .blockSize = kCCBlockSizeAES128,
-//    .IVSize = kCCBlockSizeAES128,
-//    .padding = ccPKCS7Padding,
-//
-//    .keySettings = {
-//        .keySize = kCCKeySizeAES256,
-//        .saltSize = 8,
-//        .rounds = 1,
-//        .PRF = kCCPRFHmacAlgSHA1
-//    },
-//};
